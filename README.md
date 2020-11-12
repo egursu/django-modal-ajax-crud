@@ -20,9 +20,9 @@ $
 $ # Install modules - SQLite Storage
 $ pip3 install -r requirements.txt
 $
-$ # Create tables
-$ python3 manage.py makemigrations
-$ python3 manage.py migrate
+$ # Login
+$ Username: admin
+$ Password: crudajax
 $
 $ # Start the application (development mode)
 $ python3 manage.py runserver # default port 8000
@@ -31,9 +31,5 @@ $ # Start the app - custom port
 $ # python manage.py runserver 0.0.0.0:<your_port>
 $
 $ # Access the web app in browser: http://127.0.0.1:8000/
-
-$ # Make and compile localized po files
-$ python3 manage.py makemessages -a -i venv
-$ python3 manage.py compilemessages -l ro -l ru
 ```
 <br />
