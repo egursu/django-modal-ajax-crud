@@ -1,0 +1,12 @@
+from django import forms
+from .models import Book
+from bootstrap_datepicker_plus import DatePickerInput
+
+
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = ('title', 'publication_date', 'price', 'pages', 'book_type', )
+        widgets = {
+            'publication_date': DatePickerInput(format='%Y-%m-%d'),
+        }

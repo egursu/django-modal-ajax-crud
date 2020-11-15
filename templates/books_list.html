@@ -1,0 +1,23 @@
+{% for book in object_list %}
+<tr>
+    {% comment %} <td>{{ book.id }}</td> {% endcomment %}
+    <td>{{ forloop.counter }}</td>
+    <td>{{ book.title }}</td>
+    <td>{{ book.get_book_type_display }}</td>
+    <td>{{ book.publication_date }}</td>
+    <td>{{ book.pages }}</td>
+    <td>{{ book.price }}</td>
+    <td class="crud-column">
+        <a href="{% url 'books:book-update' book.pk %}" 
+            class="btn btn-outline-warning btn-sm btn-circle btn-noborder js-load-form" title="Edit">
+            <i class="fa fa-edit"></i></a>
+        <a href="{% url 'books:book-delete' book.pk %}"
+            class="btn btn-outline-danger btn-sm btn-circle btn-noborder js-load-form" title="Delete">
+            <i class="fa fa-trash-alt"></i></a>
+    </td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan="7" class="text-center bg-warning">No book</td>
+</tr>
+{% endfor %}

@@ -25,7 +25,7 @@ $(document).ready(function(){
 		dataType: 'json',
 		success: function (data) {
 		  if (data.form_is_valid) {
-			$("#table tbody").html(data.html_list);
+			$("#ajax-table tbody").html(data.html_list);
 			$("#modal").modal("hide");
 		  }
 		  else {
