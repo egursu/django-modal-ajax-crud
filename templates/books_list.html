@@ -11,7 +11,7 @@
     <td>{{ book.price }}</td>
     <td class="crud-column">
         <a href="{% url 'books:book-update' book.pk %}" 
-            class="btn btn-outline-warning btn-sm btn-circle btn-noborder js-load-form" title="Edit">
+            class="btn btn-outline-info btn-sm btn-circle btn-noborder js-load-form" title="Edit">
             <i class="fa fa-edit"></i></a>
         <a href="{% url 'books:book-delete' book.pk %}"
             class="btn btn-outline-danger btn-sm btn-circle btn-noborder js-load-form" title="Delete">

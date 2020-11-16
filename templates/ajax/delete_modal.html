@@ -3,7 +3,7 @@
 <form  method="post" action="{{ request.path }}" class="js-save-form">
   {% csrf_token %}
   <div class="modal-header">
-    <h4 class="modal-title"><i class="fa fa-trash-alt modal-icon"></i> Delete {{ object|object_verbose_name|lower }}</h4>
+    <h4 class="modal-title"><i class="fa fa-trash-alt modal-icon text-danger"></i> Delete {{ object|object_verbose_name|lower }}</h4>
     <small class="modal-subtitle"></small>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>

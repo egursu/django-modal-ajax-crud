@@ -4,8 +4,8 @@
   {% csrf_token %}
   {{ form.media }}
   <div class="modal-header">
-    <h4 class="modal-title">{% if not form.instance.pk %}<i class="fa fa-plus-circle modal-icon"></i> Create
-        {% else %}<i class="fas fa-edit modal-icon"></i> Edit{% endif %} {{ form.instance|object_verbose_name|lower }}</h4>
+    <h4 class="modal-title">{% if not form.instance.pk %}<i class="fa fa-plus-circle modal-icon text-primary"></i> Create
+        {% else %}<i class="fas fa-edit modal-icon text-info"></i> Edit{% endif %} {{ form.instance|object_verbose_name|lower }}</h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -18,7 +18,7 @@
     {% if not form.instance.pk %}
       <button type="submit" class="btn btn-outline-primary"><i class="fa fa-plus-circle"></i> Create</button>
     {% else %}
-      <button type="submit" class="btn btn-outline-warning"><i class="fa fa-edit"></i> Edit</button>
+      <button type="submit" class="btn btn-outline-info"><i class="fa fa-edit"></i> Edit</button>
     {% endif %}
    </div>
 </form>
