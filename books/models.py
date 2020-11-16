@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify 
 
 
 class Book(models.Model):
@@ -27,3 +28,24 @@ class Book(models.Model):
         # db_table = 'books'
         verbose_name = 'Book'
         verbose_name_plural = 'Books'
+
+
+class Lead(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name='Book')
+    slug = models.SlugField(max_length=255, verbose_name='Slug', unique=True)
+    title = models.CharField(max_length=100, verbose_name='Title')
+    username = models.CharField(max_length=90, verbose_name='User name')
+    email = models.EmailField(verbose_name='email')
+    date_sent = models.DateTimeField(blank=True, null=True, verbose_name='Date sent')
+
+    def __str__(self):
+        return str(self.title)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = 'Lead'
+        verbose_name_plural = 'Leads'
+        ordering = ['-date_sent']

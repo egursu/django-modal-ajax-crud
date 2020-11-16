@@ -1,0 +1,24 @@
+{% load cms %}
+
+{% for lead in object_list %}
+<tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ lead.title }}</td>
+    <td>{{ lead.book }}</td>
+    <td>{{ book.username }}</td>
+    <td>{{ book.email }}</td>
+    <td>{{ book.date_sent }}</td>
+    <td class="crud-column">
+        <a href="{% url 'books:lead-update' lead.book.pk lead.slug %}" 
+            class="btn btn-outline-warning btn-sm btn-circle btn-noborder js-load-form" title="Edit">
+            <i class="fa fa-edit"></i></a>
+        <a href="{% url 'books:lead-delete' lead.book.pk lead.slug %}"
+            class="btn btn-outline-danger btn-sm btn-circle btn-noborder js-load-form" title="Delete">
+            <i class="fa fa-trash-alt"></i></a>
+    </td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan="7" class="text-center bg-warning">No {{ object_list|object_verbose_name|lower }}</td>
+</tr>
+{% endfor %}

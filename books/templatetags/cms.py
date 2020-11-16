@@ -11,6 +11,12 @@ def get_object_verbose_name(object):
     return object._meta.verbose_name
 # register.filter('object_verbose_name', get_object_verbose_name)
 
+@register.filter(name='object_verbose_name_plural')
+def get_object_verbose_name_plural(object):
+    if hasattr(object, 'model'):
+        object = object.model
+    return object._meta.verbose_name_plural
+
 
 @register.simple_tag
 def get_field_verbose_name(object, field):
