@@ -144,4 +144,5 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
