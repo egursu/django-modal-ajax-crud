@@ -1,7 +1,8 @@
-{% load cms widget_tweaks %}
-{{ form.media }}
+{% load cms crispy_forms_tags %}
+
 <form method="post" action="{{ request.path }}" class="js-save-form">
   {% csrf_token %}
+  {{ form.media }}
   <div class="modal-header">
     <h4 class="modal-title">{% if not form.instance.pk %}<i class="fa fa-plus-circle modal-icon"></i> Create
         {% else %}<i class="fas fa-edit modal-icon"></i> Edit{% endif %} {{ form.instance|object_verbose_name|lower }}</h4>
@@ -10,15 +11,7 @@
     </button>
   </div>
   <div class="modal-body">
-    {% for field in form %}
-      <div class="form-group{% if field.errors %} has-error{% endif %}">
-        <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
-        {% render_field field class="form-control" %}
-        {% for error in field.errors %}
-          <p class="help-block">{{ error }}</p>
-        {% endfor %}
-      </div>
-    {% endfor %}
+    {{ form|crispy }}
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>

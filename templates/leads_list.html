@@ -5,9 +5,9 @@
     <td>{{ forloop.counter }}</td>
     <td>{{ lead.title }}</td>
     <td>{{ lead.book }}</td>
-    <td>{{ book.username }}</td>
-    <td>{{ book.email }}</td>
-    <td>{{ book.date_sent }}</td>
+    <td>{{ lead.username }}</td>
+    <td>{{ lead.email }}</td>
+    <td>{{ lead.date_sent|date:'M. d, Y' }}</td>
     <td class="crud-column">
         <a href="{% url 'books:lead-update' lead.book.pk lead.slug %}" 
             class="btn btn-outline-warning btn-sm btn-circle btn-noborder js-load-form" title="Edit">

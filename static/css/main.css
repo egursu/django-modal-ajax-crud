@@ -16,10 +16,6 @@
 body {
     padding-top: 5rem;
 }
-.starter-template {
-    padding: 3rem 1.5rem;
-    text-align: center;
-}
 
 .btn-noborder {
     border: none;
@@ -35,23 +31,23 @@ body {
     font-size: 14px;
     line-height: 1.428571429;
     border-radius: 15px;
-  }
-  .btn-circle.btn-lg {
+}
+.btn-circle.btn-lg {
     width: 50px;
     height: 50px;
     padding: 10px 16px;
     font-size: 18px;
     line-height: 1.33;
     border-radius: 25px;
-  }
-  .btn-circle.btn-xl {
+}
+.btn-circle.btn-xl {
     width: 70px;
     height: 70px;
     padding: 10px 16px;
     font-size: 24px;
     line-height: 1.33;
     border-radius: 35px;
-  }
+}
 
 .crud-column {
     width: 100px; 

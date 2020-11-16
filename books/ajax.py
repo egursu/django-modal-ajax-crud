@@ -6,11 +6,9 @@ from django.views.generic import CreateView, UpdateView, DetailView, ListView, D
 class AjaxContextData:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # context['model'] = self.model
         filter = self.kwargs
         [filter.pop(key, None) for key in ['pk', 'id', 'uuid', 'slug']]
         context['object_list'] = self.get_queryset().filter(**filter)
-        # context['object_list'] = self.get_queryset()
         return context
 
 class AjaxValidForm:

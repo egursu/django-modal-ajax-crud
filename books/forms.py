@@ -16,5 +16,6 @@ class LeadForm(forms.ModelForm):
         model = Lead
         fields = ('book', 'title', 'username', 'email', 'date_sent', )
         widgets = {
+            # 'book': forms.Select(attrs={'disabled':'True'}),
             'date_sent': DatePickerInput(format='%Y-%m-%d'),
         }

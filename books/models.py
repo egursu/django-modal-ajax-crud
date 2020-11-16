@@ -42,8 +42,11 @@ class Lead(models.Model):
         return str(self.title)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        self.slug = slugify('{}-{}-{}'.format(self.title, self.book.title, self.book.pk))
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('books:lead-update', kwargs={'book': self.book.pk, 'slug': self.slug})
 
     class Meta:
         verbose_name = 'Lead'

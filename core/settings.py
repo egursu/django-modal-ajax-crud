@@ -38,11 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'bootstrap_datepicker_plus',
-    'widget_tweaks',
     'accounts.apps.AccountsConfig',
     'books.apps.BooksConfig',
-
+    'crispy_forms',
+    'bootstrap_datepicker_plus',
 ]
 
 MIDDLEWARE = [
@@ -144,3 +143,5 @@ MESSAGE_TAGS = {
     messages.WARNING: 'alert-warning',
     messages.ERROR: 'alert-danger',
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

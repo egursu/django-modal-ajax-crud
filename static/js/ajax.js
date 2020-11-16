@@ -7,10 +7,10 @@ $(document).ready(function(){
 		type: 'get',
 		dataType: 'json',
 		beforeSend: function () {
-		  $("#modal").modal("show");
+		  $("#modal-ajax").modal("show");
 		},
 		success: function (data) {
-		  $("#modal .modal-content").html(data.html_form);
+		  $("#modal-ajax .modal-content").html(data.html_form);
 		}
 	  });
 	  return false;
@@ -25,15 +25,12 @@ $(document).ready(function(){
 		dataType: 'json',
 		success: function (data) {
 		  if (data.form_is_valid) {
-			$("#ajax-table tbody").html(data.html_list);
-			$("#modal").modal("hide");
+			$("#table-ajax tbody").html(data.html_list);
+			$("#modal-ajax").modal("hide");
 		  }
 		  else {
-			$("#modal .modal-content").html(data.html_form);
+			$("#modal-ajax .modal-content").html(data.html_form);
 		  }
-		},
-		error: function(response) {
-			$('.error-block').html(response);
 		}
 	  });
 	  return false;

@@ -20,6 +20,6 @@
 </tr>
 {% empty %}
 <tr>
-    <td colspan="7" class="text-center bg-warning">No {{ book|object_verbose_name|lower }}</td>
+    <td colspan="7" class="text-center bg-warning">No {{ object_list|object_verbose_name|lower }}</td>
 </tr>
 {% endfor %}
