@@ -36,6 +36,6 @@ $(document).ready(function(){
 	  return false;
 	};
   
-	$("body").on('click', '.js-load-form', loadForm);
-	$("body").on('submit', '.js-save-form', saveForm);
+	$("body").on('click', '.ajax-load-form', loadForm);
+	$("body").on('submit', '.ajax-save-form', saveForm);
 });

@@ -1,6 +1,6 @@
 {% load cms crispy_forms_tags %}
 
-<form method="post" action="{{ request.path }}" class="js-save-form">
+<form method="post" action="{{ request.path }}" class="ajax-save-form">
   {% csrf_token %}
   {{ form.media }}
   <div class="modal-header">

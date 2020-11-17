@@ -1,6 +1,6 @@
 from django.http import JsonResponse
 from django.template.loader import render_to_string
-from django.views.generic import CreateView, UpdateView, DetailView, ListView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 
 class AjaxContextData:

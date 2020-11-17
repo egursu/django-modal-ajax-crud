@@ -14,9 +14,9 @@
 </nav>
 {% with object_list as leads %}    
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-      <h1 class="h2"><i class="fas fa-book-reader"></i> {{ title }}</i></h1>
+      <h1 class="h2"><i class="fas fa-book-reader text-warning"></i> {{ title }}</i></h1>
       <div class="btn-toolbar mb-2 mb-md-0">
-          <a class="btn btn-sm btn-outline-primary js-load-form" href="{% url 'books:lead-create' book.pk %}">
+          <a class="btn btn-sm btn-outline-primary ajax-load-form" href="{% url 'books:lead-create' book.pk %}">
           <i class="fas fa-plus-circle"></i> New {{ leads|object_verbose_name|lower }}</a>
       </div>
   </div>
