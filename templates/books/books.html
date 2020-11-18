@@ -1,6 +1,6 @@
-{% extends 'layouts/base.html' %}
+{% extends 'base.html' %}
 
-{% load cms %}
+{% load cms_tags %}
 
 {% block title %} {{ title }} · {{ block.super }} {% endblock title %}
 
@@ -29,11 +29,11 @@
         <th>{{ books|field_verbose_name:'publication_date' }}</th>
         <th>{{ books|field_verbose_name:'pages' }}</th>
         <th>{{ books|field_verbose_name:'price' }}</th>
-        <th scope="col" class="crud-column">Action</th>
+        <th class="col-action">Action</th>
       </tr>
     </thead>
     <tbody>
-      {% include 'books_list.html' %}
+      {% include 'books/books_list.html' %}
     </tbody>
   </table>
 {% endwith %}

@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts.apps.AccountsConfig',
+    'accounts',
+    'cms',
     'books.apps.BooksConfig',
     'crispy_forms',
     'bootstrap_datepicker_plus',
@@ -89,7 +90,7 @@ LOGIN_URL = 'accounts:login'
 
 LOGOUT_URL = 'accounts:logout'
 
-# LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

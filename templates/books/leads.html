@@ -1,6 +1,6 @@
-{% extends 'layouts/base.html' %}
+{% extends 'base.html' %}
 
-{% load cms %}
+{% load cms_tags %}
 
 {% block title %} {{ title }} · {{ block.super }} {% endblock title %}
 
@@ -29,11 +29,11 @@
         <th>{{ leads|field_verbose_name:'username' }}</th>
         <th>{{ leads|field_verbose_name:'email' }}</th>
         <th>{{ leads|field_verbose_name:'date_sent' }}</th>
-        <th scope="col" class="crud-column">Action</th>
+        <th class="col-action">Action</th>
       </tr>
     </thead>
     <tbody>
-      {% include 'leads_list.html' %}
+      {% include 'books/leads_list.html' %}
     </tbody>
   </table>
 {% endwith %}

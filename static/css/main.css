@@ -17,39 +17,7 @@ body {
     padding-top: 5rem;
 }
 
-.btn-noborder {
-    border: none;
-    background-color: none;
-    outline: none;
-    box-shadow: none;
-}
-.btn-circle {
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    padding: 4px 8px;
-    font-size: 14px;
-    line-height: 1.428571429;
-    border-radius: 15px;
-}
-.btn-circle.btn-lg {
-    width: 50px;
-    height: 50px;
-    padding: 10px 16px;
-    font-size: 18px;
-    line-height: 1.33;
-    border-radius: 25px;
-}
-.btn-circle.btn-xl {
-    width: 70px;
-    height: 70px;
-    padding: 10px 16px;
-    font-size: 24px;
-    line-height: 1.33;
-    border-radius: 35px;
-}
-
-.crud-column {
+.col-action {
     width: 100px; 
     text-align: center;
 }

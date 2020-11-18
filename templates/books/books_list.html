@@ -1,4 +1,4 @@
-{% load cms %}
+{% load cms_tags %}
 
 {% for book in object_list %}
 <tr>
@@ -9,17 +9,17 @@
     <td>{{ book.publication_date }}</td>
     <td>{{ book.pages }}</td>
     <td>{{ book.price }}</td>
-    <td class="crud-column">
+    <td class="col-action">
         <a href="{% url 'books:book-update' book.pk %}" 
-            class="btn btn-outline-info btn-sm btn-circle btn-noborder ajax-load-form" title="Edit">
+            class="btn btn-outline-info btn-sm border-0 rounded-circle ajax-load-form" title="Edit">
             <i class="fa fa-edit"></i></a>
         <a href="{% url 'books:book-delete' book.pk %}"
-            class="btn btn-outline-danger btn-sm btn-circle btn-noborder ajax-load-form" title="Delete">
+            class="btn btn-outline-danger btn-sm border-0 rounded-circle ajax-load-form" title="Delete">
             <i class="fa fa-trash-alt"></i></a>
     </td>
 </tr>
 {% empty %}
 <tr>
-    <td colspan="7" class="text-center bg-warning">No {{ object_list|object_verbose_name|lower }}</td>
+    <td colspan="100%" class="text-center bg-warning">No {{ object_list|object_verbose_name|lower }}</td>
 </tr>
 {% endfor %}

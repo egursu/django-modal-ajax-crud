@@ -1,4 +1,4 @@
-{% extends 'layouts/main.html' %}
+{% extends 'index.html' %}
 
 {% load static %}
 
@@ -8,7 +8,7 @@
     <link href="{% static 'css/signin.css' %}" rel="stylesheet">
 {% endblock extracss %}
 
-{% block maincontent %}
+{% block basecontent %}
     <div class="form-signin">
         <form class="form-signin" method="post" action="{% url 'accounts:login' %}">
         {% csrf_token %}

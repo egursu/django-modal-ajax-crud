@@ -21,8 +21,8 @@ admin.site.site_title = 'Books'
 admin.site.index_title = 'Books - Site administration'
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
+    path('admin/', admin.site.urls),
     path('', include('books.urls'))
 
 ]

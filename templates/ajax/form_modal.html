@@ -1,8 +1,7 @@
-{% load cms crispy_forms_tags %}
-
+{% load cms_tags crispy_forms_tags %}
+{{ form.media }}
 <form method="post" action="{{ request.path }}" class="ajax-save-form">
   {% csrf_token %}
-  {{ form.media }}
   <div class="modal-header">
     <h4 class="modal-title">{% if not form.instance.pk %}<i class="fa fa-plus-circle modal-icon text-primary"></i> Create
         {% else %}<i class="fas fa-edit modal-icon text-info"></i> Edit{% endif %} {{ form.instance|object_verbose_name|lower }}</h4>
