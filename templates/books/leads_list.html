@@ -10,11 +10,11 @@
     <td>{{ lead.date_sent|date:'M. d, Y' }}</td>
     <td>
         <a href="{% url 'books:lead-update' lead.book.pk lead.slug %}" 
-            class="btn btn-outline-info btn-sm border-0 rounded-circle ajax-load-form" title="Edit">
-            <i class="fa fa-edit"></i></a>
+            class="btn btn-outline-info btn-sm border-0 rounded-circle ajax-load-form" title="Edit"
+            name="edit" id="editButton-{{ lead.pk }}"><i class="fa fa-edit"></i></a>
         <a href="{% url 'books:lead-delete' lead.book.pk lead.slug %}"
-            class="btn btn-outline-danger btn-sm border-0 rounded-circle ajax-load-form" title="Delete">
-            <i class="fa fa-trash-alt"></i></a>
+            class="btn btn-outline-danger btn-sm border-0 rounded-circle ajax-load-form" title="Delete"
+            name="delete" id="deleteButton-{{ lead.pk }}"><i class="fa fa-trash-alt"></i></a>
     </td>
 </tr>
 {% empty %}

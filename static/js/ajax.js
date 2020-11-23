@@ -45,6 +45,19 @@ $(document).ready(function(){
 	$("body").on('submit', '.ajax-save-form', saveForm);
 });
 
+jQuery(function($) {
+	$('#table-ajax tbody tr').dblclick(function() {
+		// btn = $("a[id^=editButton-" + $(this).attr('id') + "]");
+		btn = $(this).find($('a[name^=edit]'))
+		if (btn.hasClass('ajax-load-form')) {
+			btn.click();
+		  } else { 
+			window.location = btn.attr('href');
+		  }
+		return false;
+	});
+});
+
 $('.order').sortable({
     cursor: 'ns-resize',
     axis:   'y',

@@ -11,11 +11,11 @@
     <td>{{ book.price }}</td>
     <td>
         <a href="{% url 'books:book-update' book.pk %}" 
-            class="btn btn-outline-info btn-sm border-0 rounded-circle ajax-load-form" title="Edit">
-            <i class="fa fa-edit"></i></a>
+            class="btn btn-outline-info btn-sm border-0 rounded-circle ajax-load-form" title="Edit"
+            name="edit" id="editButton-{{ book.pk }}"><i class="fa fa-edit"></i></a>
         <a href="{% url 'books:book-delete' book.pk %}"
-            class="btn btn-outline-danger btn-sm border-0 rounded-circle ajax-load-form" title="Delete">
-            <i class="fa fa-trash-alt"></i></a>
+            class="btn btn-outline-danger btn-sm border-0 rounded-circle ajax-load-form" title="Delete"
+            name="delete" id="deleteButton-{{ book.pk }}"><i class="fa fa-trash-alt"></i></a>
     </td>
 </tr>
 {% empty %}
