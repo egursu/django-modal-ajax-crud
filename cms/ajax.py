@@ -1,6 +1,9 @@
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseServerError
 from django.template.loader import render_to_string
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import View, CreateView, UpdateView, DeleteView
+from django.apps import apps
+from django.urls import resolve
+import json
 
 
 class AjaxContextData:
@@ -70,3 +73,27 @@ class AjaxDeleteView(AjaxContextData, DeleteView):
             return JsonResponse(data)
         else:
             return self.delete(*args, **kwargs)
+
+
+class AjaxReorderView(View):
+    def post(self, *args, **kwargs):
+        if self.request.method == "POST" and self.request.is_ajax():
+            try:
+                data = json.loads(self.request.body)
+                if ':' in self.kwargs['model']:
+                    app_model = self.kwargs['model'].split(':', 1)
+                    app_name = app_model[0]
+                    model_name = app_model[1]
+                else:
+                    app_name = resolve(self.request.path).app_name 
+                    model_name = self.kwargs['model']
+                model = apps.get_model(app_name, model_name)
+                for key, value in enumerate(data):
+                    object = model.objects.get(pk=value) 
+                    object.order = key + 1
+                    object.save()
+            except KeyError:
+                HttpResponseServerError("Malformed data!")
+            return JsonResponse({"success": True}, status=200)
+        else:
+            return JsonResponse({"success": False}, status=400)

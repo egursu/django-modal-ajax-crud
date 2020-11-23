@@ -4,7 +4,7 @@
   {% csrf_token %}
   <div class="modal-header">
     <h4 class="modal-title">{% if not form.instance.pk %}<i class="fa fa-plus-circle modal-icon text-primary"></i> Create
-        {% else %}<i class="fas fa-edit modal-icon text-info"></i> Edit{% endif %} {{ form.instance|object_verbose_name|lower }}</h4>
+        {% else %}<i class="fas fa-edit modal-icon text-info"></i> Edit{% endif %} {{ form.instance|verbose_name|lower }}</h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>

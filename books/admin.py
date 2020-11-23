@@ -21,9 +21,10 @@ class LeadAdmin(admin.ModelAdmin):
     list_display = ('title', 'book', 'username', 'email', 'date_sent')
     list_display_links = ('title', 'book')
     search_fields = ('title', 'book')
-    list_filter = ('book', 'date_sent', )
+    list_filter = ('book', )
     # list_editable = ('', )
     # readonly_fields = ('username',)
+    ordering = ('book','order',)
     fields = (('title', 'slug'), ('username', 'email'), ('book', 'date_sent'), )
 
 admin.site.register(Lead, LeadAdmin)

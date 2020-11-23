@@ -21,3 +21,7 @@ body {
     width: 100px; 
     text-align: center;
 }
+
+table tbody.order tr {
+    cursor: grab;
+}

@@ -1,3 +1,8 @@
+$.ajaxSetup({
+	// headers: { "X-CSRFToken": '{{ csrf_token }}' }
+	headers: { "X-CSRFToken": $.cookie("csrftoken") },
+});
+
 $(document).ready(function(){
 
 	var loadForm = function() {
@@ -38,4 +43,24 @@ $(document).ready(function(){
   
 	$("body").on('click', '.ajax-load-form', loadForm);
 	$("body").on('submit', '.ajax-save-form', saveForm);
+});
+
+$('.order').sortable({
+    cursor: 'ns-resize',
+    axis:   'y',
+    update: function(e, ui) {
+        href = $(this).attr('data-url');
+        $(this).sortable("refresh");
+        sorted = JSON.stringify($(this).sortable("toArray"));
+        // sorted = $(this).sortable("serialize");
+        $.ajax({
+            type: 'POST',
+            url:  href,
+            data: sorted,
+            dataType: 'json',
+            success: function(msg) {
+                //do something with the sorted data
+            }
+        });
+    }
 });

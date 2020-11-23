@@ -17,6 +17,7 @@ class Book(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Price, €')
     pages = models.IntegerField(blank=True, null=True, verbose_name='Pages')
     book_type = models.PositiveSmallIntegerField(choices=BOOK_TYPES, verbose_name='Book type')
+    order = models.PositiveSmallIntegerField(default=0, verbose_name='Order')
 
     def __str__(self):
         return self.title
@@ -26,9 +27,10 @@ class Book(models.Model):
 
     class Meta:
         # db_table = 'books'
+        ordering = ['order']
         verbose_name = 'Book'
         verbose_name_plural = 'Books'
-
+        
 
 class Lead(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name='Book')
@@ -37,7 +39,8 @@ class Lead(models.Model):
     username = models.CharField(max_length=90, verbose_name='User name')
     email = models.EmailField(verbose_name='email')
     date_sent = models.DateTimeField(blank=True, null=True, verbose_name='Date sent')
-
+    order = models.PositiveSmallIntegerField(default=0, verbose_name='Order')
+    
     def __str__(self):
         return str(self.title)
 
@@ -51,4 +54,4 @@ class Lead(models.Model):
     class Meta:
         verbose_name = 'Lead'
         verbose_name_plural = 'Leads'
-        ordering = ['-date_sent']
+        ordering = ('order', '-date_sent')
