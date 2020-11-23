@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify 
+from cms.fields import OrderField
 
 
 class Book(models.Model):
@@ -17,8 +18,8 @@ class Book(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Price, €')
     pages = models.IntegerField(blank=True, null=True, verbose_name='Pages')
     book_type = models.PositiveSmallIntegerField(choices=BOOK_TYPES, verbose_name='Book type')
-    order = models.PositiveSmallIntegerField(default=0, verbose_name='Order')
-
+    # order = models.PositiveSmallIntegerField(default=0, verbose_name='Order')
+    order = OrderField(blank=True, verbose_name='Order #')
     def __str__(self):
         return self.title
 
@@ -39,8 +40,9 @@ class Lead(models.Model):
     username = models.CharField(max_length=90, verbose_name='User name')
     email = models.EmailField(verbose_name='email')
     date_sent = models.DateTimeField(blank=True, null=True, verbose_name='Date sent')
-    order = models.PositiveSmallIntegerField(default=0, verbose_name='Order')
-    
+    # order = models.PositiveSmallIntegerField(default=0, verbose_name='Order')
+    order = OrderField(blank=True, for_fields=['book'], verbose_name='Order #')
+
     def __str__(self):
         return str(self.title)
 
