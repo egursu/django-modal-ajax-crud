@@ -29,7 +29,7 @@
         <th>{{ books|verbose_name:'field:publication_date' }}</th>
         <th>{{ books|verbose_name:'field:pages' }}</th>
         <th>{{ books|verbose_name:'field:price' }}</th>
-        <th class="col-action">Action</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody class="order" data-url="{% url 'cms:reorder' object_list|model_name %}">

@@ -29,7 +29,7 @@
         <th>{{ leads|verbose_name:'field:username' }}</th>
         <th>{{ leads|verbose_name:'field:email' }}</th>
         <th>{{ leads|verbose_name:'field:date_sent' }}</th>
-        <th class="col-action">Action</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody class="order" data-url="{% url 'cms:reorder' object_list|model_name %}">

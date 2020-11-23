@@ -17,9 +17,10 @@ body {
     padding-top: 5rem;
 }
 
-.col-action {
-    width: 100px; 
-    text-align: center;
+#table-ajax th:last-child {
+    width: 90px; 
+    /* text-align: center; */
+    margin: auto;
 }
 
 table tbody.order tr {

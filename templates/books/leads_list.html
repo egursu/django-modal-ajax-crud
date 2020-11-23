@@ -8,7 +8,7 @@
     <td>{{ lead.username }}</td>
     <td>{{ lead.email }}</td>
     <td>{{ lead.date_sent|date:'M. d, Y' }}</td>
-    <td class="col-action">
+    <td>
         <a href="{% url 'books:lead-update' lead.book.pk lead.slug %}" 
             class="btn btn-outline-info btn-sm border-0 rounded-circle ajax-load-form" title="Edit">
             <i class="fa fa-edit"></i></a>

@@ -9,7 +9,7 @@
     <td>{{ book.publication_date }}</td>
     <td>{{ book.pages }}</td>
     <td>{{ book.price }}</td>
-    <td class="col-action">
+    <td>
         <a href="{% url 'books:book-update' book.pk %}" 
             class="btn btn-outline-info btn-sm border-0 rounded-circle ajax-load-form" title="Edit">
             <i class="fa fa-edit"></i></a>
