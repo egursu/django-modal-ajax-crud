@@ -1,6 +1,6 @@
 {% load cms_tags %}
 
-{% for lead in object_list %}
+{% for lead in lead_list %}
 <tr id="{{ lead.pk }}">
     {% comment %} <td>{{ forloop.counter }}</td> {% endcomment %}
     <td>{{ lead.title }}</td>
@@ -19,6 +19,6 @@
 </tr>
 {% empty %}
 <tr>
-    <td colspan="100%" class="text-center bg-warning">No {{ object_list|verbose_name|lower }}</td>
+    <td colspan="100%" class="text-center bg-warning">No {{ lead_list|verbose_name|lower }}</td>
 </tr>
 {% endfor %}

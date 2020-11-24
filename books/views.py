@@ -13,7 +13,7 @@ def home(request):
 @login_required
 def books_list(request):
     books = Book.objects.all()
-    context = {"title": "Books", "object_list": books}
+    context = {"title": "Books", "book_list": books}
     return render(request, 'books/books.html', context)
 
 
@@ -40,7 +40,7 @@ def leads_list(request, book):
     book_obj = get_object_or_404(Book, pk=book)
     title = "Leads on {}".format(book_obj)
     leads = book_obj.lead_set.all()
-    context = {"title": title, "book": book_obj, "object_list": leads}
+    context = {"title": title, "book": book_obj, "lead_list": leads}
     return render(request, 'books/leads.html', context)
 
 class LeadCreate(LoginRequiredMixin, AjaxCreateView):

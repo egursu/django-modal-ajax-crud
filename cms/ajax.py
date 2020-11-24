@@ -11,7 +11,8 @@ class AjaxContextData:
         context = super().get_context_data(**kwargs)
         filter = self.kwargs
         [filter.pop(key, None) for key in ['pk', 'id', 'uuid', 'slug']]
-        context['object_list'] = self.get_queryset().filter(**filter)
+        # context['object_list'] = self.get_queryset().filter(**filter)
+        context['%s_list' % self.model.__name__.lower()] = self.get_queryset().filter(**filter)
         return context
 
 class AjaxValidForm:
@@ -21,6 +22,7 @@ class AjaxValidForm:
         if form.is_valid():
             form.save()
             data['form_is_valid'] = True
+            data['form_id'] = form.instance._meta.model_name
             data['html_list'] = render_to_string(self.ajax_list, context, self.request)
         else:
             data['form_is_valid'] = False
@@ -68,6 +70,7 @@ class AjaxDeleteView(AjaxContextData, DeleteView):
             self.object.delete()
             data = dict()
             data['form_is_valid'] = True
+            data['form_id'] = self.object._meta.model_name
             context = self.get_context_data()
             data['html_list'] = render_to_string(self.ajax_list, context, self.request)
             return JsonResponse(data)

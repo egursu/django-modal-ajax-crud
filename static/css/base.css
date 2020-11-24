@@ -17,7 +17,8 @@ body {
     padding-top: 5rem;
 }
 
-#table-ajax th:last-child {
+/* #table-ajax th:last-child { */
+table[id^="table-ajax"] th:last-child {
     width: 90px; 
     /* text-align: center; */
     margin: auto;

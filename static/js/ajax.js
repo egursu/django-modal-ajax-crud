@@ -29,13 +29,14 @@ $(document).ready(function(){
 		type: form.attr("method"),
 		dataType: 'json',
 		success: function (data) {
-		  if (data.form_is_valid) {
-			$("#table-ajax tbody").html(data.html_list);
-			$("#modal-ajax").modal("hide");
-		  }
-		  else {
-			$("#modal-ajax .modal-content").html(data.html_form);
-		  }
+			if (data.form_is_valid) {
+				// $("#table-ajax tbody").html(data.html_list);
+				$("table[id^=table-ajax-" + data.form_id + "]").find('tbody').html(data.html_list);
+				$("#modal-ajax").modal("hide");
+			}
+			else {
+				$("#modal-ajax .modal-content").html(data.html_form);
+			}
 		}
 	  });
 	  return false;
@@ -43,37 +44,41 @@ $(document).ready(function(){
   
 	$("body").on('click', '.ajax-load-form', loadForm);
 	$("body").on('submit', '.ajax-save-form', saveForm);
-});
 
-jQuery(function($) {
-	$('#table-ajax tbody tr').dblclick(function() {
+	// Double click on table row
+	$('table[id*=table-ajax] tbody').delegate('tr', 'dblclick', function() {
 		// btn = $("a[id^=editButton-" + $(this).attr('id') + "]");
-		btn = $(this).find($('a[name^=edit]'))
-		if (btn.hasClass('ajax-load-form')) {
-			btn.click();
-		  } else { 
-			window.location = btn.attr('href');
-		  }
+		// btn = $(this).find($('a[id*=editButton]'))
+		btn = $(this).has('a').find($('a[name^=edit]'))
+		if (typeof btn.attr('href') != 'undefined') {
+			if (btn.hasClass('ajax-load-form')) {
+				btn.click();
+			} else { 
+				window.location = btn.attr('href');
+			}
+		}
 		return false;
 	});
-});
 
-$('.order').sortable({
-    cursor: 'ns-resize',
-    axis:   'y',
-    update: function(e, ui) {
-        href = $(this).attr('data-url');
-        $(this).sortable("refresh");
-        sorted = JSON.stringify($(this).sortable("toArray"));
-        // sorted = $(this).sortable("serialize");
-        $.ajax({
-            type: 'POST',
-            url:  href,
-            data: sorted,
-            dataType: 'json',
-            success: function(msg) {
-                //do something with the sorted data
-            }
-        });
-    }
+	// Order table rows
+	$('.order').sortable({
+		cursor: 'ns-resize',
+		axis:   'y',
+		update: function(e, ui) {
+			href = $(this).attr('data-url');
+			$(this).sortable("refresh");
+			sorted = JSON.stringify($(this).sortable("toArray"));
+			// sorted = $(this).sortable("serialize");
+			$.ajax({
+				type: 'POST',
+				url:  href,
+				data: sorted,
+				dataType: 'json',
+				success: function(msg) {
+					//do something with the sorted data
+				}
+			});
+		}
+	});
+
 });

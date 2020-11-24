@@ -1,6 +1,6 @@
 {% load cms_tags %}
 
-{% for book in object_list %}
+{% for book in book_list %}
 <tr id="{{ book.pk }}">
     {% comment %} <td>{{ book.id }}</td> {% endcomment %}
     {% comment %} <td>{{ forloop.counter }}</td> {% endcomment %}
@@ -20,6 +20,6 @@
 </tr>
 {% empty %}
 <tr>
-    <td colspan="100%" class="text-center bg-warning">No {{ object_list|verbose_name|lower }}</td>
+    <td colspan="100%" class="text-center bg-warning">No {{ book_list|verbose_name|lower }}</td>
 </tr>
 {% endfor %}

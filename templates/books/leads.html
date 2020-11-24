@@ -9,32 +9,30 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="{% url 'books:home' %}">Home</a></li>
     <li class="breadcrumb-item"><a href="{% url 'books:books-list' %}">{{ book|verbose_name:'verbose_name_plural' }}</a></li>
-    <li class="breadcrumb-item active" aria-current="page">{{ object_list|verbose_name:'verbose_name_plural' }} on<strong>&nbsp;{{ book }}</strong></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ lead_list|verbose_name:'verbose_name_plural' }} on<strong>&nbsp;{{ book }}</strong></li>
   </ol>
-</nav>
-{% with object_list as leads %}    
-  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-      <h1 class="h2"><i class="fas fa-book-reader text-warning"> {{ title }}</i></h1>
-      <div class="btn-toolbar mb-2 mb-md-0">
-          <a class="btn btn-sm btn-outline-primary ajax-load-form" href="{% url 'books:lead-create' book.pk %}">
-          <i class="fas fa-plus-circle"></i> New {{ leads|verbose_name|lower }}</a>
-      </div>
-  </div>
-  <table class="table table-hover" id="table-ajax">
-    <thead class="thead-light">
-      <tr>
-        {% comment %} <th>#</th> {% endcomment %}
-        <th>{{ leads|verbose_name:'field:title' }}</th>
-        <th>{{ leads|verbose_name:'field:book' }}</th>
-        <th>{{ leads|verbose_name:'field:username' }}</th>
-        <th>{{ leads|verbose_name:'field:email' }}</th>
-        <th>{{ leads|verbose_name:'field:date_sent' }}</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody class="order" data-url="{% url 'cms:reorder' object_list|model_name %}">
-      {% include 'books/leads_list.html' %}
-    </tbody>
-  </table>
-{% endwith %}
+</nav>   
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+    <h1 class="h2"><i class="fas fa-book-reader text-warning"> {{ title }}</i></h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a class="btn btn-sm btn-outline-primary ajax-load-form" href="{% url 'books:lead-create' book.pk %}">
+        <i class="fas fa-plus-circle"></i> New {{ lead_list|verbose_name|lower }}</a>
+    </div>
+</div>
+<table class="table table-hover" id="table-ajax-{{ lead_list|verbose_name:'model_name' }}">
+  <thead class="thead-light">
+    <tr>
+      {% comment %} <th>#</th> {% endcomment %}
+      <th>{{ lead_list|verbose_name:'field:title' }}</th>
+      <th>{{ lead_list|verbose_name:'field:book' }}</th>
+      <th>{{ lead_list|verbose_name:'field:username' }}</th>
+      <th>{{ lead_list|verbose_name:'field:email' }}</th>
+      <th>{{ lead_list|verbose_name:'field:date_sent' }}</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody class="order" data-url="{% url 'cms:reorder' lead_list|model_name %}">
+    {% include 'books/leads_list.html' %}
+  </tbody>
+</table>
 {% endblock %}
