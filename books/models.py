@@ -17,7 +17,7 @@ class Book(models.Model):
     publication_date = models.DateField(null=True, verbose_name='Publicate on')
     price = models.DecimalField(max_digits=5, decimal_places=2, verbose_name='Price, €')
     pages = models.IntegerField(blank=True, null=True, verbose_name='Pages')
-    book_type = models.PositiveSmallIntegerField(choices=BOOK_TYPES, verbose_name='Book type')
+    book_type = models.PositiveSmallIntegerField(choices=BOOK_TYPES, default=EBOOK, verbose_name='Book type')
     # order = models.PositiveSmallIntegerField(default=0, verbose_name='Order')
     order = OrderField(blank=True, verbose_name='Order #')
     def __str__(self):

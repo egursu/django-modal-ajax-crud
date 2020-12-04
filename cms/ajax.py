@@ -24,8 +24,10 @@ class AjaxValidForm:
             data['form_is_valid'] = True
             data['form_id'] = form.instance._meta.model_name
             data['html_list'] = render_to_string(self.ajax_list, context, self.request)
+            data['message'] = 'Successful saved.'
         else:
             data['form_is_valid'] = False
+            data['message'] = 'Form validation error!'
         data['html_form'] = render_to_string(self.ajax_modal, context, request=self.request)
         if self.request.is_ajax():
             return JsonResponse(data)
@@ -71,6 +73,7 @@ class AjaxDeleteView(AjaxContextData, DeleteView):
             data = dict()
             data['form_is_valid'] = True
             data['form_id'] = self.object._meta.model_name
+            data['message'] = 'Successful deleted.'
             context = self.get_context_data()
             data['html_list'] = render_to_string(self.ajax_list, context, self.request)
             return JsonResponse(data)

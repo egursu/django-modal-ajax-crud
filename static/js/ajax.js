@@ -33,11 +33,17 @@ $(document).ready(function(){
 				// $("#table-ajax tbody").html(data.html_list);
 				$("table[id^=table-ajax-" + data.form_id + "]").find('tbody').html(data.html_list);
 				$("#modal-ajax").modal("hide");
+				toastr["success"](data.message);
 			}
 			else {
 				$("#modal-ajax .modal-content").html(data.html_form);
+				toastr["error"](data.message);
 			}
-		}
+		},
+		error: function(xhr, status, error) {
+			var err = JSON.parse(xhr.responseText);
+			toastr["error"](err.message);
+		  }
 	  });
 	  return false;
 	};

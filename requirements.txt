@@ -1,3 +1,6 @@
-Django
-django-crispy-forms
-django-bootstrap-datepicker-plus
+asgiref==3.3.1
+Django==3.1.4
+django-bootstrap-datepicker-plus==3.0.5
+django-crispy-forms==1.10.0
+pytz==2020.4
+sqlparse==0.4.1
