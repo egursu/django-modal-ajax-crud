@@ -1,7 +1,10 @@
 # CRUD - Ajax modal forms (django)
 inspired by https://simpleisbetterthancomplex.com/tutorial/2016/11/15/how-to-implement-a-crud-using-ajax-and-json.html
-\nused packages:
+<br />
+used packages:
+<br />
  django-bootstrap-datepicker-plus - https://pypi.org/project/django-bootstrap-datepicker-plus/
+<br />
  toastr - a Javascript library for non-blocking notifications - https://github.com/CodeSeven/toastr
 <br />
 
