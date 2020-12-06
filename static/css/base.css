@@ -19,11 +19,38 @@ body {
 
 /* #table-ajax th:last-child { */
 table[id^="table-ajax"] th:last-child {
-    width: 90px; 
-    /* text-align: center; */
+    width: 75px;
+    text-align: center;
+    place-items: center;
     margin: auto;
 }
 
-table tbody.order tr {
+table[id^="table-ajax"] th:last-child.crud-lg {
+    width: 90px;
+    text-align: center;
+    place-items: center;
+    margin: auto;
+}
+
+table[id^="table-ajax"] th:last-child.crud-1 {
+    width: 45px;
+    text-align: center;
+    place-items: center;
+    margin: auto;
+}
+
+table[id^="table-ajax"] th:last-child.crud-3 {
+    width: 110px;
+    text-align: center;
+    place-items: center;
+    margin: auto;
+}
+
+table tbody.order tr:not(.nosort) {
     cursor: grab;
+}
+
+a[disabled],
+a[disabled]:hover {
+    pointer-events: none;
 }

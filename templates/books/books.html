@@ -28,7 +28,7 @@
       <th>{{ book_list|verbose_name:'field:publication_date' }}</th>
       <th>{{ book_list|verbose_name:'field:pages' }}</th>
       <th>{{ book_list|verbose_name:'field:price' }}</th>
-      <th>Action</th>
+      <th class="crud-lg">Action</th>
     </tr>
   </thead>
   <tbody class="order" data-url="{% url 'cms:reorder' book_list|model_name %}">

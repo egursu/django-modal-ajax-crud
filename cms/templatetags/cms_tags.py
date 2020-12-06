@@ -11,7 +11,8 @@ def get_verbose_name(object, attr='verbose_name'):
     obj = object.model if hasattr(object, 'model') else object
     if ':' in attr and attr.split(':', 1)[0].lower() == 'field':
         field = attr.split(':', 1)[1]
-        attr = 'verbose_name' if hasattr(obj._meta.get_field(field), 'verbose_name') else 'name'
+        attr = 'verbose_name' if hasattr(
+            obj._meta.get_field(field), 'verbose_name') else 'name'
         return getattr(obj._meta.get_field(field), attr) if obj else None
     else:
         attr = attr if hasattr(obj._meta, attr) else 'object_name'
@@ -24,6 +25,8 @@ def get_field_verbose_name(object, field):
     prop = obj._meta.get_field(field)
     attr = 'verbose_name' if hasattr(prop, 'verbose_name') else 'name'
     return getattr(prop, attr) if obj else None
+
+
 register.filter('field_verbose_name', get_field_verbose_name)
 
 

@@ -18,7 +18,12 @@
     </td>
 </tr>
 {% empty %}
-<tr>
-    <td colspan="100%" class="text-center bg-warning">No {{ lead_list|verbose_name|lower }}</td>
+<tr class="table-warning nosort">
+    <td colspan="100%" class="text-center"><small class="text-muted">No {{ lead_list|verbose_name|lower }}</small></td>
 </tr>
 {% endfor %}
+{% if lead_list %}
+<tr class="table-light table-sm nosort">
+    <td colspan="100%"><small class="text-muted">Total rows: {{ lead_list.count }}</small></td>
+</tr>
+{% endif %}

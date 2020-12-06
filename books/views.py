@@ -10,6 +10,7 @@ from cms.ajax import AjaxCreateView, AjaxUpdateView, AjaxDeleteView
 def home(request):
     return redirect('books:books-list')
 
+
 @login_required
 def books_list(request):
     books = Book.objects.all()
@@ -23,11 +24,13 @@ class BookCreate(LoginRequiredMixin, AjaxCreateView):
     ajax_modal = 'ajax/form_modal.html'
     ajax_list = 'books/books_list.html'
 
+
 class BookUpdate(LoginRequiredMixin, AjaxUpdateView):
     model = Book
     form_class = BookForm
     ajax_modal = 'ajax/form_modal.html'
     ajax_list = 'books/books_list.html'
+
 
 class BookDelete(LoginRequiredMixin, AjaxDeleteView):
     model = Book
@@ -43,17 +46,20 @@ def leads_list(request, book):
     context = {"title": title, "book": book_obj, "lead_list": leads}
     return render(request, 'books/leads.html', context)
 
+
 class LeadCreate(LoginRequiredMixin, AjaxCreateView):
     model = Lead
     form_class = LeadForm
     ajax_modal = 'ajax/form_modal.html'
     ajax_list = 'books/leads_list.html'
 
+
 class LeadUpdate(LoginRequiredMixin, AjaxUpdateView):
     model = Lead
     form_class = LeadForm
     ajax_modal = 'ajax/form_modal.html'
     ajax_list = 'books/leads_list.html'
+
 
 class LeadDelete(LoginRequiredMixin, AjaxDeleteView):
     model = Lead
