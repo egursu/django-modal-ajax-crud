@@ -7,6 +7,8 @@ used packages:
 <br />
  toastr - a Javascript library for non-blocking notifications - https://github.com/CodeSeven/toastr
 <br />
++ ajax multiple files upload
+<br />
 
 ## How to use it
 

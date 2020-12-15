@@ -136,6 +136,10 @@ STATICFILES_DIRS = [
     Path(BASE_DIR).joinpath('static'),
 ]
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = Path(BASE_DIR).joinpath('media')
+
 # Bootstrap 4 message tags and class.
 MESSAGE_TAGS = {
     messages.DEBUG: 'alert-info',

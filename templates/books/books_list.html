@@ -10,6 +10,10 @@
     <td>{{ book.pages }}</td>
     <td>{{ book.price }}</td>
     <td>
+        <a href="{% url 'books:file-list' book.pk %}" 
+            class="btn btn-outline-success btn-sm border-0 rounded-circle" title="Files"
+            name="files" id="filesButton-{{ book.pk }}"><i class="fa fa-copy"></i></a>
+    <td>
         <a href="{% url 'books:book-update' book.pk %}" 
             class="btn btn-outline-info btn-sm border-0 rounded-circle ajax-load-form" title="Edit"
             name="edit" id="editButton-{{ book.pk }}"><i class="fa fa-edit"></i></a>

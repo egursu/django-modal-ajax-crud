@@ -63,3 +63,25 @@ class Lead(models.Model):
         verbose_name = 'Lead'
         verbose_name_plural = 'Leads'
         ordering = ('order', '-date_sent')
+
+
+class File(models.Model):
+    book = models.ForeignKey(
+        Book, on_delete=models.CASCADE, verbose_name='Book')
+    title = models.CharField(max_length=255, null=True, blank=True, verbose_name='Filename')
+    file = models.FileField(upload_to='files/', null=True,
+                            blank=True, verbose_name='File')
+    uploaded_at = models.DateTimeField(
+        auto_now_add=True, null=True, blank=True, verbose_name='File uploaded at')
+    order = OrderField(blank=True, for_fields=['book'], verbose_name='Order #')
+
+    def __str__(self):
+        return str(self.title)
+
+    # def get_absolute_url(self):
+    #     return reverse('books:files-update', kwargs={'book': self.book.pk, 'slug': self.slug})
+
+    class Meta:
+        verbose_name = 'File'
+        verbose_name_plural = 'Files'
+        ordering = ('order', '-uploaded_at')

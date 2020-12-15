@@ -18,4 +18,8 @@ urlpatterns = [
          LeadUpdate.as_view(), name='lead-update'),
     path('book/<int:book>/lead/<slug:slug>/delete/',
          LeadDelete.as_view(), name='lead-delete'),
+
+    path('book/<int:book>/files/', file_list, name='file-list'),
+    path('book/<int:book>/files/upload',
+         AjaxFilesUpload.as_view(), name='files-upload'),
 ]

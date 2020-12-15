@@ -12,7 +12,7 @@
   </ol>
 </nav>   
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-    <h1 class="h2"><i class="fas fa-book text-success"> {{ title }}</i></h1>
+    <h1 class="h2"><i class="fas fa-book text-info"> {{ title }}</i></h1>
     <div class="btn-toolbar mb-2 mb-md-0">
         <a class="btn btn-sm btn-outline-primary ajax-load-form" href="{% url 'books:book-create' %}">
         <i class="fas fa-plus-circle"></i> New {{ book_list|verbose_name|lower }}</a>
@@ -28,6 +28,7 @@
       <th>{{ book_list|verbose_name:'field:publication_date' }}</th>
       <th>{{ book_list|verbose_name:'field:pages' }}</th>
       <th>{{ book_list|verbose_name:'field:price' }}</th>
+      <th style="width: 45px;">Files</th>
       <th class="crud-lg">Action</th>
     </tr>
   </thead>

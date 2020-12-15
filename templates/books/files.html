@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% load static cms_tags %}
+
+{% block title %} {{ title }} · {{ block.super }} {% endblock title %}
+
+{% block extrajs %}
+  <script src="{% static 'js/jquery-file-upload/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/ajax_file_upload.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'books:home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'books:books-list' %}">{{ book|verbose_name:'verbose_name_plural' }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">{{ file_list|verbose_name:'verbose_name_plural' }}
+      on<strong>&nbsp;{{ book }}</strong></li>
+  </ol>
+</nav>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+  <h1 class="h2"><i class="fas fa-file-alt text-success"> {{ title }}</i></h1>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <button type="button" class="btn btn-sm btn-outline-primary ajax-upload-files">
+      <i class="fas fa-file-upload"></i> Upload {{ file_list|verbose_name:'verbose_name_plural'|lower }}
+    </button>
+    {% comment %} <a class="btn btn-sm btn-outline-primary ajax-upload-files" href="">
+      <i class="fas fa-file-upload"></i> Upload {{ file_list|verbose_name:'verbose_name_plural'|lower }}</a> {% endcomment %}
+  </div>
+</div>
+<input id="fileupload" type="file" name="file" multiple style="display: none;" 
+  data-url="{% url 'books:files-upload' book.pk %}"
+  data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+
+<table class="table table-hover" id="table-ajax-{{ file_list|verbose_name:'model_name' }}">
+  <thead class="thead-light">
+    <tr>
+      <th>{{ file_list|verbose_name:'field:title' }}</th>
+      <th>{{ file_list|verbose_name:'field:uploaded_at' }}</th>
+      <th class="crud-lg">Action</th>
+    </tr>
+  </thead>
+  <tbody class="order" data-url="{% url 'cms:reorder' file_list|model_name %}">
+    {% for file in file_list %}
+    <tr id="{{ file.pk }}">
+      <td><a href="{{ file.file.url }}">{{ file.file.name }}</a></td>
+      <td>{{ file.uploaded_at|date:'M. d, Y' }}</td>
+      <td>
+        {% comment %} <a href="{% url 'books:lead-update' lead.book.pk lead.slug %}"
+          class="btn btn-outline-info btn-sm border-0 rounded-circle ajax-load-form" title="Edit" name="edit"
+          id="editButton-{{ lead.pk }}"><i class="fa fa-edit"></i></a>
+        <a href="{% url 'books:lead-delete' lead.book.pk lead.slug %}"
+          class="btn btn-outline-danger btn-sm border-0 rounded-circle ajax-load-form" title="Delete" name="delete"
+          id="deleteButton-{{ lead.pk }}"><i class="fa fa-trash-alt"></i></a> {% endcomment %}
+      </td>
+    </tr>
+    {% empty %}
+    <tr class="table-warning nosort">
+      <td colspan="100%" class="text-center"><small class="text-muted">No {{ file_list|verbose_name|lower }}</small>
+      </td>
+    </tr>
+    {% endfor %}
+    {% if file_list %}
+    <tr class="table-light table-sm nosort">
+      <td colspan="100%"><small class="text-muted">Total rows: {{ file_list.count }}</small></td>
+    </tr>
+    {% endif %}
+  </tbody>
+</table>
+{% endblock %}

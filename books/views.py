@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect,  get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from .models import Book, Lead
-from .forms import BookForm, LeadForm
+from .models import Book, Lead, File
+from .forms import BookForm, LeadForm, FileForm
 from cms.ajax import AjaxCreateView, AjaxUpdateView, AjaxDeleteView
+from django.views.generic import View
+from django.http import JsonResponse
 
 
 @login_required
@@ -65,3 +67,35 @@ class LeadDelete(LoginRequiredMixin, AjaxDeleteView):
     model = Lead
     ajax_modal = 'ajax/delete_modal.html'
     ajax_list = 'books/leads_list.html'
+
+
+@login_required
+def file_list(request, book):
+    book_obj = get_object_or_404(Book, pk=book)
+    title = "Files on {}".format(book_obj)
+    files = book_obj.file_set.all()
+    context = {"title": title, "book": book_obj, "file_list": files}
+    return render(request, 'books/files.html', context)
+
+
+class AjaxFilesUpload(LoginRequiredMixin, View):
+    model = File
+    form_class = FileForm
+
+    def get_initial(self):
+        initial = super().get_initial()
+        initial['book'] = self.kwargs.pop('book')
+        return initial
+
+    def get(self, request):
+        file_list = self.object.all()
+        return render(self.request, 'books/files.html', {'file_list': file_list})
+
+    def post(self, request):
+        form = self.form_class(self.request.POST, self.request.FILES)
+        if form.is_valid():
+            file = form.save()
+            data = {'is_valid': True, 'name': file.file.name, 'url': file.file.url}
+        else:
+            data = {'is_valid': False}
+        return JsonResponse(data)

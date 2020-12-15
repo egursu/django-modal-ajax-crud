@@ -1,5 +1,5 @@
 from django import forms
-from .models import Book, Lead
+from .models import Book, Lead, File
 from bootstrap_datepicker_plus import DatePickerInput
 
 
@@ -28,3 +28,9 @@ class LeadForm(forms.ModelForm):
         widgets = {
             'date_sent': DatePickerInput(format='%Y-%m-%d'),
         }
+
+
+class FileForm(forms.ModelForm):
+    class Meta:
+        model = File
+        fields = ('file', )
