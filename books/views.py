@@ -79,23 +79,19 @@ def file_list(request, book):
 
 
 class AjaxFilesUpload(LoginRequiredMixin, View):
-    model = File
-    form_class = FileForm
-
-    def get_initial(self):
-        initial = super().get_initial()
-        initial['book'] = self.kwargs.pop('book')
-        return initial
-
-    def get(self, request):
-        file_list = self.object.all()
+    def get(self, request, *args, **kwargs):
+        file_list = File.objects.get_queryset().filter(**self.kwargs)
         return render(self.request, 'books/files.html', {'file_list': file_list})
 
-    def post(self, request):
-        form = self.form_class(self.request.POST, self.request.FILES)
+    def post(self, request, *args, **kwargs):
+        book = Book.objects.get(pk=kwargs['book'])
+        print(book)
+        form = FileForm(self.request.POST, self.request.FILES)
+        print(form)
         if form.is_valid():
-            file = form.save()
-            data = {'is_valid': True, 'name': file.file.name, 'url': file.file.url}
+            instance = form.save(commit=False)
+            instance.save()
+            data = {'is_valid': True, 'name': instance.file.name, 'url': instance.file.url}
         else:
             data = {'is_valid': False}
         return JsonResponse(data)

@@ -31,6 +31,7 @@ class LeadForm(forms.ModelForm):
 
 
 class FileForm(forms.ModelForm):
-    class Meta:
+     class Meta:
         model = File
-        fields = ('file', )
+        fields = ('book', 'file', )
+
