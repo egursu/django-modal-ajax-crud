@@ -55,7 +55,7 @@ $(document).ready(function () {
 	$('table[id*=table-ajax] tbody').delegate('tr', 'dblclick', function () {
 		// btn = $("a[id^=editButton-" + $(this).attr('id') + "]");
 		// btn = $(this).find($('a[id*=editButton]'))
-		btn = $(this).has('a').find($('a[name^=edit]'))
+		btn = $(this).has('a').find($('a[name^=edit]'));
 		if (typeof btn.attr('href') != 'undefined') {
 			if (btn.hasClass('ajax-load-form')) {
 				btn.click();

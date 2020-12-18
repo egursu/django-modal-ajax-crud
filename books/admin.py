@@ -38,14 +38,14 @@ admin.site.register(Lead, LeadAdmin)
 class FileAdmin(admin.ModelAdmin):
     save_as = True
     save_on_top = True
-    list_display = ('book', 'title', 'file', 'uploaded_at', )
-    list_display_links = ('title', 'file')
-    search_fields = ('title', )
+    list_display = ('book', 'file', 'uploaded_at', )
+    list_display_links = ('file', )
+    search_fields = ('file', )
     list_filter = ('book', )
     # list_editable = ('', )
     # readonly_fields = ('username',)
     ordering = ('book', 'order',)
-    fields = (('book', 'title'), ('file', 'uploaded_at'), )
+    fields = ('book', 'file', 'uploaded_at', )
 
 
 admin.site.register(File, FileAdmin)

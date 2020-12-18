@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from cms.fields import OrderField
+from pathlib import Path
 
 
 class Book(models.Model):
@@ -68,18 +69,24 @@ class Lead(models.Model):
 class File(models.Model):
     book = models.ForeignKey(
         Book, on_delete=models.CASCADE, verbose_name='Book')
-    title = models.CharField(max_length=255, null=True, blank=True, verbose_name='Filename')
     file = models.FileField(upload_to='files/', null=True,
-                            blank=True, verbose_name='File')
+                            blank=True, max_length=255, verbose_name='Filename')
     uploaded_at = models.DateTimeField(
         auto_now_add=True, null=True, blank=True, verbose_name='File uploaded at')
     order = OrderField(blank=True, for_fields=['book'], verbose_name='Order #')
 
-    def __str__(self):
-        return str(self.title)
+    @property
+    def filename(self):
+        return Path(self.file.name).name
 
-    # def get_absolute_url(self):
-    #     return reverse('books:files-update', kwargs={'book': self.book.pk, 'slug': self.slug})
+    def __str__(self):
+        return self.filename
+
+    def delete(self, using=None, keep_parents=False):
+        storage = self.file.storage
+        if storage.exists(self.file.name):
+            storage.delete(self.file.name)
+        super().delete()
 
     class Meta:
         verbose_name = 'File'

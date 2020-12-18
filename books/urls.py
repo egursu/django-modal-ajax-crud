@@ -22,4 +22,6 @@ urlpatterns = [
     path('book/<int:book>/files/', file_list, name='file-list'),
     path('book/<int:book>/files/upload',
          AjaxFilesUpload.as_view(), name='files-upload'),
+    path('book/<int:book>/file/<int:pk>/delete/',
+         FileDelete.as_view(), name='file-delete'),
 ]

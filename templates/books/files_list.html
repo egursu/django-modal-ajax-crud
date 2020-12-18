@@ -1,0 +1,23 @@
+{% load cms_tags %}
+
+{% for file in file_list %}
+<tr id="{{ file.pk }}">
+    <td><a href="{{ file.file.url }}">{{ file.filename }}</a></td>
+    <td>{{ file.uploaded_at|date:'M. d, Y' }}</td>
+    <td>
+        <a href="{% url 'books:file-delete' file.book.pk file.pk %}"
+            class="btn btn-outline-danger btn-sm border-0 rounded-circle ajax-load-form" title="Delete" name="delete"
+            id="deleteButton-{{ file.pk }}"><i class="fa fa-trash-alt"></i></a>
+    </td>
+</tr>
+{% empty %}
+<tr class="table-warning nosort">
+    <td colspan="100%" class="text-center"><small class="text-muted">No {{ file_list|verbose_name|lower }}</small>
+    </td>
+</tr>
+{% endfor %}
+{% if file_list %}
+<tr class="table-light table-sm nosort">
+    <td colspan="100%"><small class="text-muted">Total rows: {{ file_list.count }}</small></td>
+</tr>
+{% endif %}

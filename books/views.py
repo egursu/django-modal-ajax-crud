@@ -6,6 +6,7 @@ from .forms import BookForm, LeadForm, FileForm
 from cms.ajax import AjaxCreateView, AjaxUpdateView, AjaxDeleteView
 from django.views.generic import View
 from django.http import JsonResponse
+from django.template.loader import render_to_string
 
 
 @login_required
@@ -79,19 +80,29 @@ def file_list(request, book):
 
 
 class AjaxFilesUpload(LoginRequiredMixin, View):
+    model = File
+    form_class = FileForm
+    ajax_list = 'books/files_list.html'
+
     def get(self, request, *args, **kwargs):
-        file_list = File.objects.get_queryset().filter(**self.kwargs)
+        file_list = self.model.objects.get_queryset().filter(**self.kwargs)
         return render(self.request, 'books/files.html', {'file_list': file_list})
 
     def post(self, request, *args, **kwargs):
-        book = Book.objects.get(pk=kwargs['book'])
-        print(book)
-        form = FileForm(self.request.POST, self.request.FILES)
-        print(form)
+        form = self.form_class(self.request.POST, self.request.FILES)
         if form.is_valid():
             instance = form.save(commit=False)
+            book = Book.objects.get(pk=kwargs['book'])
+            instance.book = book
             instance.save()
-            data = {'is_valid': True, 'name': instance.file.name, 'url': instance.file.url}
+            html_list = render_to_string(self.ajax_list, {'file_list': book.file_set.all()}, self.request)
+            data = {'is_valid': True, 'html_list': html_list}
         else:
             data = {'is_valid': False}
         return JsonResponse(data)
+
+
+class FileDelete(LoginRequiredMixin, AjaxDeleteView):
+    model = File
+    ajax_modal = 'ajax/delete_modal.html'
+    ajax_list = 'books/files_list.html'
