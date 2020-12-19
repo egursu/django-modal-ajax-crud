@@ -4,7 +4,7 @@ inspired by https://simpleisbetterthancomplex.com/tutorial/2016/11/15/how-to-imp
 used packages:
 + django-bootstrap-datepicker-plus - https://pypi.org/project/django-bootstrap-datepicker-plus/
 + toastr - a Javascript library for non-blocking notifications - https://github.com/CodeSeven/toastr
-+ ajax multiple files upload
++ ajax multiple files upload - https://github.com/blueimp/jQuery-File-Upload
 <br />
 
 ## How to use it
