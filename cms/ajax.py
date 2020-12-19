@@ -1,6 +1,6 @@
 from django.http import JsonResponse, HttpResponseServerError
 from django.template.loader import render_to_string
-from django.views.generic import View, CreateView, UpdateView, DeleteView
+from django.views.generic import View, ListView, CreateView, UpdateView, DeleteView
 from django.apps import apps
 from django.urls import resolve
 import json
@@ -121,3 +121,22 @@ class AjaxReorderView(View):
                 return JsonResponse(data)
         else:
             return JsonResponse({"is_valid": False}, status=400)
+
+
+class AjaxFilesUpload(AjaxContextData, ListView):
+    def post(self, request, *args, **kwargs):
+        # time.sleep(1) 
+        context = self.get_context_data()
+        form = self.form_class(self.request.POST, self.request.FILES)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            for key in kwargs:
+                model = apps.get_model('books', key)
+                object = model.objects.get(pk=kwargs[key])
+                setattr(instance, key, object)
+            instance.save()
+            html_list = render_to_string(self.ajax_list, context, self.request)
+            data = {'is_valid': True, 'html_list': html_list}
+        else:
+            data = {'is_valid': False}
+        return JsonResponse(data)

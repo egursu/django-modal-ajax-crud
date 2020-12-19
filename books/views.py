@@ -3,10 +3,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from .models import Book, Lead, File
 from .forms import BookForm, LeadForm, FileForm
-from cms.ajax import AjaxCreateView, AjaxUpdateView, AjaxDeleteView
+from cms.ajax import AjaxCreateView, AjaxUpdateView, AjaxDeleteView, AjaxFilesUpload
 from django.views.generic import View
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+import time
 
 
 @login_required
@@ -79,27 +80,34 @@ def file_list(request, book):
     return render(request, 'books/files.html', context)
 
 
-class AjaxFilesUpload(LoginRequiredMixin, View):
+class FilesUpload(LoginRequiredMixin, AjaxFilesUpload):
     model = File
     form_class = FileForm
     ajax_list = 'books/files_list.html'
+    
 
-    def get(self, request, *args, **kwargs):
-        file_list = self.model.objects.get_queryset().filter(**self.kwargs)
-        return render(self.request, 'books/files.html', {'file_list': file_list})
+# class AjaxFilesUpload(LoginRequiredMixin, View):
+#     model = File
+#     form_class = FileForm
+#     ajax_list = 'books/files_list.html'
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(self.request.POST, self.request.FILES)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            book = Book.objects.get(pk=kwargs['book'])
-            instance.book = book
-            instance.save()
-            html_list = render_to_string(self.ajax_list, {'file_list': book.file_set.all()}, self.request)
-            data = {'is_valid': True, 'html_list': html_list}
-        else:
-            data = {'is_valid': False}
-        return JsonResponse(data)
+#     def get(self, request, *args, **kwargs):
+#         file_list = self.model.objects.get_queryset().filter(**self.kwargs)
+#         return render(self.request, 'books/files.html', {'file_list': file_list})
+
+#     def post(self, request, *args, **kwargs):
+#         # time.sleep(1) 
+#         form = self.form_class(self.request.POST, self.request.FILES)
+#         if form.is_valid():
+#             instance = form.save(commit=False)
+#             book = Book.objects.get(pk=kwargs['book'])
+#             instance.book = book
+#             instance.save()
+#             html_list = render_to_string(self.ajax_list, {'file_list': book.file_set.all()}, self.request)
+#             data = {'is_valid': True, 'html_list': html_list}
+#         else:
+#             data = {'is_valid': False}
+#         return JsonResponse(data)
 
 
 class FileDelete(LoginRequiredMixin, AjaxDeleteView):
