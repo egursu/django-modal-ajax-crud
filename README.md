@@ -2,11 +2,8 @@
 inspired by https://simpleisbetterthancomplex.com/tutorial/2016/11/15/how-to-implement-a-crud-using-ajax-and-json.html
 <br />
 used packages:
-<br />
- django-bootstrap-datepicker-plus - https://pypi.org/project/django-bootstrap-datepicker-plus/
-<br />
- toastr - a Javascript library for non-blocking notifications - https://github.com/CodeSeven/toastr
-<br />
++ django-bootstrap-datepicker-plus - https://pypi.org/project/django-bootstrap-datepicker-plus/
++ toastr - a Javascript library for non-blocking notifications - https://github.com/CodeSeven/toastr
 + ajax multiple files upload
 <br />
 
