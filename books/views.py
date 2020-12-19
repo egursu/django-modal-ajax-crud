@@ -84,30 +84,6 @@ class FilesUpload(LoginRequiredMixin, AjaxFilesUpload):
     model = File
     form_class = FileForm
     ajax_list = 'books/files_list.html'
-    
-
-# class AjaxFilesUpload(LoginRequiredMixin, View):
-#     model = File
-#     form_class = FileForm
-#     ajax_list = 'books/files_list.html'
-
-#     def get(self, request, *args, **kwargs):
-#         file_list = self.model.objects.get_queryset().filter(**self.kwargs)
-#         return render(self.request, 'books/files.html', {'file_list': file_list})
-
-#     def post(self, request, *args, **kwargs):
-#         # time.sleep(1) 
-#         form = self.form_class(self.request.POST, self.request.FILES)
-#         if form.is_valid():
-#             instance = form.save(commit=False)
-#             book = Book.objects.get(pk=kwargs['book'])
-#             instance.book = book
-#             instance.save()
-#             html_list = render_to_string(self.ajax_list, {'file_list': book.file_set.all()}, self.request)
-#             data = {'is_valid': True, 'html_list': html_list}
-#         else:
-#             data = {'is_valid': False}
-#         return JsonResponse(data)
 
 
 class FileDelete(LoginRequiredMixin, AjaxDeleteView):

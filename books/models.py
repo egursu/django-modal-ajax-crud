@@ -91,4 +91,4 @@ class File(models.Model):
     class Meta:
         verbose_name = 'File'
         verbose_name_plural = 'Files'
-        ordering = ('order', '-uploaded_at')
+        ordering = ('order', )

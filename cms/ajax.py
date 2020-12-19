@@ -1,4 +1,4 @@
-from django.http import JsonResponse, HttpResponseServerError
+from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.views.generic import View, ListView, CreateView, UpdateView, DeleteView
 from django.apps import apps
@@ -123,20 +123,27 @@ class AjaxReorderView(View):
             return JsonResponse({"is_valid": False}, status=400)
 
 
-class AjaxFilesUpload(AjaxContextData, ListView):
+class AjaxFilesUpload(View):
     def post(self, request, *args, **kwargs):
-        # time.sleep(1) 
-        context = self.get_context_data()
-        form = self.form_class(self.request.POST, self.request.FILES)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            for key in kwargs:
-                model = apps.get_model('books', key)
-                object = model.objects.get(pk=kwargs[key])
-                setattr(instance, key, object)
-            instance.save()
-            html_list = render_to_string(self.ajax_list, context, self.request)
-            data = {'is_valid': True, 'html_list': html_list}
+        if self.request.is_ajax():
+            context = dict()
+            form = self.form_class(self.request.POST, self.request.FILES)
+            if form.is_valid():
+                instance = form.save(commit=False)
+                app_name = resolve(self.request.path).app_name
+                for key in kwargs:
+                    fmodel = apps.get_model(app_name, key)
+                    fobject = fmodel.objects.get(pk=kwargs[key])
+                    model = self.model.__name__.lower()
+                    context['%s_list' % model] = getattr(
+                        fobject, '%s_set' % model).all()
+                    setattr(instance, key, fobject)
+                instance.save()
+                html_list = render_to_string(
+                    self.ajax_list, context, self.request)
+                data = {'form_id': form.instance._meta.model_name, 'is_valid': True, 'html_list': html_list}
+            else:
+                data = {'is_valid': False}
+            return JsonResponse(data)
         else:
-            data = {'is_valid': False}
-        return JsonResponse(data)
+            return JsonResponse({"is_valid": False}, status=400)
