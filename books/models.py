@@ -82,11 +82,20 @@ class File(models.Model):
     def __str__(self):
         return self.filename
 
-    def delete(self, using=None, keep_parents=False):
+    def save(self, *args, **kwargs):
+        if self.pk:
+            old_file = File.objects.get(pk=self.pk).file
+            if not old_file == self.file:
+                storage = old_file.storage
+                if storage.exists(old_file.name):
+                    storage.delete(old_file.name)
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
         storage = self.file.storage
         if storage.exists(self.file.name):
             storage.delete(self.file.name)
-        super().delete()
+        super().delete(*args, **kwargs)
 
     class Meta:
         verbose_name = 'File'
