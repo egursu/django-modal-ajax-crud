@@ -2,8 +2,8 @@
   <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
       <a class="navbar-brand"
           href="{% if user.is_staff or user.is_superuser %}{% url 'admin:index' %}{% else %}{% url 'app:home' %}{% endif %}">
-          <img src="{% static 'img/bootstrap-solid.svg' %}" withdh="21" height="21" alt="Logo" class="mr-2 mt-n1"> Demo:
-          Books CRUD Ajax Modal forms <i class="far fa-user-circle"></i>
+          <img src="{% static 'img/bootstrap-solid.svg' %}" withdh="21" height="21" alt="Logo" class="mr-2 mt-n1">Books <i class="far fa-arrow-alt-circle-right"></i> 
+          CRUD Ajax Modal CBV <i class="far fa-user-circle"></i>
           {{ request.user.get_full_name|default:request.user }}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
           aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
