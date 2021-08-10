@@ -1,12 +1,13 @@
 # CRUD - Ajax modal forms (django & jquery)
 Django CRUD Ajax CBV, JQuery
-<br />
+
 inspired by https://simpleisbetterthancomplex.com/tutorial/2016/11/15/how-to-implement-a-crud-using-ajax-and-json.html
+and https://simpleisbetterthancomplex.com/tutorial/2016/11/22/django-multiple-file-upload-using-ajax.html
 <br />
 used packages:
 + django-bootstrap-datepicker-plus - https://pypi.org/project/django-bootstrap-datepicker-plus/
 + toastr - a Javascript library for non-blocking notifications - https://github.com/CodeSeven/toastr
-+ ajax multiple files upload - https://github.com/blueimp/jQuery-File-Upload; https://simpleisbetterthancomplex.com/tutorial/2016/11/22/django-multiple-file-upload-using-ajax.html
++ ajax multiple files upload - https://github.com/blueimp/jQuery-File-Upload
 <br />
 ## How to use it
 
