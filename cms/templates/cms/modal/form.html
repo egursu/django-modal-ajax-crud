@@ -1,0 +1,57 @@
+{% load cms_tags widget_tweaks %}
+{{ form.media }}
+<form method="post" action="{{ request.path }}" class="ajax-save-form needs-validation" novalidate>
+    {% csrf_token %}
+    <div class="modal-header">
+        <h3 class="modal-title">{% if not form.instance.pk %}<i class="fa fa-plus modal-icon text-primary"> 
+            {{ title }}</i>{% else %}<i class="fas fa-edit modal-icon text-info"> 
+            {{ title }}</i>{% endif %}</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        
+        {% if form.errors %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {% for key, value in form.errors.items %}
+                <div class="fieldWrapper">
+                    {{ key }}: {{ value|striptags }}
+                </div>
+            {% endfor %}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        {% endif %}
+        
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+        
+        {% for field in form.visible_fields %}
+        <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<span
+                    class="text-danger ml-1">*</span>{% endif %}</label>
+            {% with WIDGET_ERROR_CLASS='is-invalid' %}
+                {% render_field field placeholder=field.help_text %}
+            {% endwith %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    <div class="text-danger small" role="alert">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"><i class="fa fa-times mr-2"></i>Close</button>
+        {% if not form.instance.pk %}
+        <button type="submit" class="btn btn-outline-primary"><i class="fa fa-plus mr-2"></i>{{ title }}</button>
+        {% else %}
+        <button type="submit" class="btn btn-outline-info"><i class="fa fa-edit mr-2"></i>{{ title }}</button>
+        {% endif %}
+    </div>
+</form>

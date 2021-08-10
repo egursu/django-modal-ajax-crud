@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load cms_tags %}
+{% block title %} {{ title }} · {{ block.super }} {% endblock title %}
+{% block content %}   
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'app:home' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'app:book-list' %}">Books</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+  </ol>
+</nav> 
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+    <h1 class="h2"><i class="fas fa-book text-warning"> {{ title }}</i></h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a class="btn btn-sm btn-outline-primary ajax-load-form" href="{% get_object_url 'create' %}">
+        <i class="fas fa-plus"></i> Create {{ model_verbose_name }}</a>
+    </div>
+</div>
+<table class="table table-hover" id="table">
+  <thead class="thead-light">
+    <tr>
+      {% comment %} <th>#</th> {% endcomment %}
+      <th>{{ object_list|verbose_name:'field:title' }}</th>
+      <th>{{ object_list|verbose_name:'field:book' }}</th>
+      <th>{{ object_list|verbose_name:'field:username' }}</th>
+      <th>{{ object_list|verbose_name:'field:email' }}</th>
+      <th>{{ object_list|verbose_name:'field:date_sent' }}</th>
+      <th style="width: 160px; text-align: center;">Actions</th>
+    </tr>
+  </thead>
+  <tbody class="order" data-url="{% url 'cms:reorder' model_name %}">
+    {% include 'app/partials/lead_list_partial.html' %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% load cms_tags %}
+{% for file in object_list %}
+<tr id="{{ file.pk }}">
+    <td><a href="{{ file.file.url }}">{{ file.filename }}</a></td>
+    <td>{{ file.uploaded_at|date:'M. d, Y' }}</td>
+    <td style="text-align: center;">
+        <a href="{{ file.file.url }}" class="btn btn-outline-warning btn-sm border-0" title="View">
+            <i class="fa fa-eye"></i></a>
+        <a href="{% get_object_url 'delete' file %}" class="btn btn-outline-danger btn-sm border-0 ajax-load-form" title="Delete">
+            <i class="fa fa-trash-alt"></i></a>
+        <a href="" class="btn btn-sm border-0 reorder" title="Reorder">
+            <i class="fa fa-sort text-secondary"></i></a>
+    </td>
+</tr>
+{% empty %}
+<tr class="table-warning nosort">
+    <td colspan="100%" class="text-center"><small class="text-muted">No {{ model_verbose_name_plural|lower }}</small></td>
+</tr>
+{% endfor %}
+{% if object_list %}
+<tr class="table-light table-sm nosort">
+    <td colspan="100%"><small class="text-muted">Total rows: {{ object_list.count }}</small></td>
+</tr>
+{% endif %}

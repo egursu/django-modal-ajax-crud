@@ -1,0 +1,33 @@
+{% load cms_tags %}
+{% for book in object_list %}
+<tr id="{{ book.pk }}">
+    <td><a href="{% url 'app:lead-list' book.pk %}" title="Leads">{{ book.title }}</a></td>
+    <td>{{ book.get_book_type_display }}</td>
+    <td>{{ book.publication_date }}</td>
+    <td>{{ book.pages }}</td>
+    <td>{{ book.price }}</td>
+    <td style="text-align: center;">
+        <a href="{% url 'app:file-list' book.pk %}" class="btn btn-outline-success btn-sm border-0" title="Files">
+            <i class="fa fa-copy"></i></a></td>
+    <td style="text-align: center;">
+        <a href="{% get_object_url 'detail' book %}" class="btn btn-outline-warning btn-sm border-0 ajax-load-form" title="View">
+            <i class="fa fa-eye"></i></a>
+        <a href="{% get_object_url 'update' book %}" class="btn btn-outline-info btn-sm border-0 ajax-load-form" title="Edit">
+            <i class="fa fa-edit"></i></a>
+        <a href="{% get_object_url 'delete' book %}" class="btn btn-outline-danger btn-sm border-0 ajax-load-form" title="Delete">
+            <i class="fa fa-trash-alt"></i></a>
+        <a href="" class="btn btn-sm border-0 reorder" title="Reorder">
+            <i class="fa fa-sort text-secondary"></i></a>
+    </td>
+</tr>
+{% empty %}
+<tr class="table-warning nosort">
+    <td colspan="100%" class="text-center"><small class="text-muted">No {{ model_verbose_name_plural|lower }}</small>
+    </td>
+</tr>
+{% endfor %}
+{% if object_list %}
+<tr class="table-light table-sm nosort">
+    <td colspan="100%"><small class="text-muted">Total rows: {{ object_list.count }}</small></td>
+</tr>
+{% endif %}
