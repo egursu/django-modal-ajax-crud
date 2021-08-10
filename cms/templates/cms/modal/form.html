@@ -1,6 +1,6 @@
 {% load cms_tags widget_tweaks %}
 {{ form.media }}
-<form method="post" action="{{ request.path }}" class="ajax-save-form needs-validation" novalidate>
+<form method="post" action="{{ request.path }}" class="ajax-save-form">
     {% csrf_token %}
     <div class="modal-header">
         <h3 class="modal-title">{% if not form.instance.pk %}<i class="fa fa-plus modal-icon text-primary"> 
