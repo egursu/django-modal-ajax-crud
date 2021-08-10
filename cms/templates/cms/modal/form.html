@@ -1,5 +1,4 @@
 {% load cms_tags widget_tweaks %}
-{{ form.media }}
 <form method="post" action="{{ request.path }}" class="ajax-save-form">
     {% csrf_token %}
     <div class="modal-header">
@@ -10,9 +9,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-
     <div class="modal-body">
-        
         {% if form.errors %}
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             {% for key, value in form.errors.items %}
@@ -25,7 +22,6 @@
             </button>
         </div>
         {% endif %}
-        
         {% for hidden in form.hidden_fields %}
             {{ hidden }}
         {% endfor %}
@@ -45,7 +41,6 @@
         </div>
         {% endfor %}
     </div>
-
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"><i class="fa fa-times mr-2"></i>Close</button>
         {% if not form.instance.pk %}
@@ -55,3 +50,6 @@
         {% endif %}
     </div>
 </form>
+{% block extrajs %}
+{{ form.media }}
+{% endblock extrajs %}

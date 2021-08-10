@@ -1,4 +1,3 @@
-{% load cms_tags widget_tweaks %}
 <div class="modal-header">
     <h3 class="modal-title"><i class="fa fa-eye modal-icon text-warning"> 
         {{ title }}</i></h3>
@@ -6,27 +5,18 @@
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
-
 <div class="modal-body">
     <form>
         <fieldset disabled>
         {% for field in form.visible_fields %}
-            {% if form_control %}
-            <div class="form-group">
-                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                {% render_field field %}
-            </div>
-            {% else %}  
-            <div class="row align-items-center">
+            <div class="form-group row align-items-center">
                 <label for="{{ field.id_for_label }}" class="col-sm-3 col-form-label col-form-label-sm">{{ field.label }}:</label>
-                <div class="col-sm">{% render_field field|append_attr:"readonly" class="form-control-plaintext" %}</div>
+                <div class="col-sm">{{ field }}</div>
             </div>
-            {% endif %}
         {% endfor %}
         </fieldset>
     </form>
 </div>
-
 <div class="modal-footer">
     <button type="button" class="btn btn-outline-secondary" data-dismiss="modal"><i class="fa fa-times mr-2"></i>Close</button>
 </div>

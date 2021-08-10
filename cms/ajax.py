@@ -58,7 +58,6 @@ class AjaxDetailView(AjaxContextMixin, AjaxObjectMixin, DynamicForm, DetailView)
         context = super().get_context_data(**kwargs)
         form = self.form_class(instance=self.object)
         context['form'] = form
-        context['form_control'] = self.form_control if hasattr(self, 'form_control') else False
         return context
 
 

@@ -31,7 +31,6 @@ class BookDelete(LoginRequiredMixin, AjaxDeleteView):
 
 class BookDetail(LoginRequiredMixin, AjaxDetailView):
     model = Book
-    # form_control = True
     # form_class = BookForm
 
 
