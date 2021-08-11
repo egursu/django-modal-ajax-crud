@@ -26,11 +26,11 @@ $(document).ready(function () {
       type: "get",
       dataType: "json",
       beforeSend: function () {
-        $("#modal").modal("show");
+        $("#modal-ajax").modal("show");
       },
       success: function (data) {
-        $("#modal .modal-content").html(data.html_form);
-        // $("#modal .modal-content").text(data.html_form);
+        $("#modal-ajax .modal-content").html(data.html_form);
+        // $("#modal-ajax .modal-content").text(data.html_form);
       },
     });
     return false;
@@ -45,15 +45,15 @@ $(document).ready(function () {
       dataType: "json",
       success: function (data) {
         if (data.form_is_valid) {
-          $("#modal").modal("hide");
+          $("#modal-ajax").modal("hide");
           if (data.redirect) {
             top.location = data.redirect;
           } else {
-            $("#table tbody").html(data.html_list);
+            $("#table-ajax tbody").html(data.html_list);
           }
           // toastr["success"](data.message);
         } else {
-          $("#modal .modal-content").html(data.html_form);
+          $("#modal-ajax .modal-content").html(data.html_form);
           // toastr["error"](data.message);
         }
       },
@@ -65,8 +65,8 @@ $(document).ready(function () {
     return false;
   };
 
-  $("#modal").on("hidden.bs.modal", function (e) {
-    $("#modal .modal-content").empty();
+  $("#modal-ajax").on("hidden.bs.modal", function (e) {
+    $("#modal-ajax .modal-content").empty();
   });
 
   $("body").on("click", ".ajax-load-form", loadForm);
@@ -104,7 +104,4 @@ $(document).ready(function () {
     },
   });
 
-  $(".ajax-upload-files").click(function () {
-    $("#fileupload").click();
-  });
 });

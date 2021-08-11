@@ -1,4 +1,8 @@
 $(function () {
+  $(".ajax-upload-files").click(function () {
+    $("#fileupload").click();
+  });
+
   $("#fileupload").fileupload({
     dataType: "json",
     sequentialUploads: true,
@@ -20,7 +24,7 @@ $(function () {
     done: function (e, data) {
       if (data.result.is_valid) {
         // $("table[id^=table-ajax-" + data.result.form_id + "]").find('tbody').html(data.result.html_list);
-        $("#table tbody").html(data.result.html_list);
+        $("#table-ajax tbody").html(data.result.html_list);
       }
     },
   });

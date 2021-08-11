@@ -23,7 +23,7 @@
   <input id="fileupload" type="file" name="file" multiple style="display: none;"
   data-url="{% get_object_url 'upload' %}" data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
 </div><br>
-<table class="table table-striped table-hover" id="table">
+<table class="table table-striped table-hover" id="table-ajax">
   <thead class="thead-light">
     <tr>
       <th>{{ object_list|verbose_name:'field:file' }}</th>
