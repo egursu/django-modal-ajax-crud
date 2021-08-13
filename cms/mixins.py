@@ -1,3 +1,4 @@
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.template.loader import render_to_string
 from django.http import JsonResponse, HttpResponseRedirect
@@ -58,13 +59,14 @@ class AjaxFormMixin:
 
     def form_valid(self, form):
         if form.is_valid():
-            obj = form.save()
-            if obj:
+            self.object = form.save()
+            if self.object:
                 self.data['form_is_valid'] = True
-                self.data['html_list'] = render_to_string(self.ajax_list, context=self.get_context_data(), request=self.request)
+                if hasattr(self, 'get_redirect_url'):
+                    self.data['redirect'] = self.get_redirect_url()
+                else:
+                    self.data['html_list'] = render_to_string(self.ajax_list, context=self.get_context_data(), request=self.request)
                 self.data['message'] = 'Successful saved.'
-                if hasattr(self, 'success_url'):
-                   self.data['redirect'] = self.success_url
             else:
                 super().form_invalid(form)
             if self.request.is_ajax():

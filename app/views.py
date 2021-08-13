@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy, reverse
 from .models import Book, Lead, File
 from .forms import BookForm, LeadForm, FileForm
 from cms.ajax import (AjaxCreateView, AjaxDetailView, AjaxUpdateView, AjaxDeleteView, AjaxFilesUpload)
@@ -9,8 +10,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def home(request):
-    # return render(request, 'blank.html', context={'title': 'Blank page'})
-    return redirect('app:book-list')
+    return render(request, 'blank.html', context={'title': 'Blank page'})
+    # return redirect('app:book-list')
 
 
 class BookList(LoginRequiredMixin, CoreListView):
@@ -20,7 +21,10 @@ class BookList(LoginRequiredMixin, CoreListView):
 class BookCreate(LoginRequiredMixin, AjaxCreateView):
     model = Book
     form_class = BookForm
-    # success_url = reverse_lazy('app:home')
+
+    # def get_redirect_url(self):
+    #     return reverse_lazy('app:home')
+
 
 class BookUpdate(LoginRequiredMixin, AjaxUpdateView):
     model = Book

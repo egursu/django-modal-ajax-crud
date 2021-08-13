@@ -1,11 +1,12 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.text import slugify
 from cms.fields import OrderField
 from cms.mixins import GetAbsoluteUrl
 from pathlib import Path
 
 
-class Book(models.Model, GetAbsoluteUrl):
+class Book(models.Model):
     HARDCOVER = 1
     PAPERBACK = 2
     EBOOK = 3
@@ -26,6 +27,9 @@ class Book(models.Model, GetAbsoluteUrl):
 
     def get_fields(self):
         return [(field.verbose_name, field.value_from_object(self)) for field in self.__class__._meta.fields]
+    
+    # def get_absolute_url(self):
+    #     return reverse('app:book-update', kwargs={'pk': self.pk})
 
     class Meta:
         db_table = 'book'
@@ -34,7 +38,7 @@ class Book(models.Model, GetAbsoluteUrl):
         verbose_name_plural = 'Books'
 
 
-class Lead(models.Model, GetAbsoluteUrl):
+class Lead(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE, verbose_name='Book')
     slug = models.SlugField(max_length=255, verbose_name='Slug', unique=True)
     title = models.CharField(max_length=100, verbose_name='Title')
