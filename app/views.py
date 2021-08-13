@@ -10,8 +10,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def home(request):
-    return render(request, 'blank.html', context={'title': 'Blank page'})
-    # return redirect('app:book-list')
+    # return render(request, 'blank.html', context={'title': 'Blank page'})
+    return redirect('app:book-list')
 
 
 class BookList(LoginRequiredMixin, CoreListView):
